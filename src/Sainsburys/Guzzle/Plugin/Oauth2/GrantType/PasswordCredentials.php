@@ -1,16 +1,16 @@
 <?php
 
-namespace CommerceGuys\Guzzle\Plugin\Oauth2\GrantType;
+namespace Sainsburys\Guzzle\Plugin\Oauth2\GrantType;
 
 use Guzzle\Common\Collection;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Exception\RequestException;
 
 /**
- * Client credentials grant type.
- * @link http://tools.ietf.org/html/rfc6749#section-4.4
+ * Resource owner password credentials grant type.
+ * @link http://tools.ietf.org/html/rfc6749#section-4.3
  */
-class ClientCredentials implements GrantTypeInterface
+class PasswordCredentials implements GrantTypeInterface
 {
     /** @var ClientInterface The token endpoint client */
     protected $client;
@@ -25,7 +25,7 @@ class ClientCredentials implements GrantTypeInterface
             'client_secret' => '',
             'scope' => '',
         ), array(
-            'client_id',
+            'client_id', 'username', 'password'
         ));
     }
 
@@ -35,7 +35,9 @@ class ClientCredentials implements GrantTypeInterface
     public function getTokenData()
     {
         $postBody = array(
-            'grant_type' => 'client_credentials',
+            'grant_type' => 'password',
+            'username' => $this->config['username'],
+            'password' => $this->config['password'],
         );
         if ($this->config['scope']) {
             $postBody['scope'] = $this->config['scope'];

@@ -16,7 +16,7 @@ Ways to use it:
 Just set an access token and make a request.
 ```php
 use Guzzle\Http\Client;
-use CommerceGuys\Guzzle\Plugin\Oauth2\Oauth2Plugin;
+use Sainsburys\Guzzle\Plugin\Oauth2\Oauth2Plugin;
 
 $accessToken = array(
   'access_token' => 'e72758a43e1646969f9f7bd7737d0cd637ed17ae',
@@ -34,9 +34,9 @@ Or use a grant type.
 Optionally, add a refresh token grant type, used to refresh expired access tokens.
 ```php
 use Guzzle\Http\Client;
-use CommerceGuys\Guzzle\Plugin\Oauth2\Oauth2Plugin;
-use CommerceGuys\Guzzle\Plugin\Oauth2\GrantType\PasswordCredentials;
-use CommerceGuys\Guzzle\Plugin\Oauth2\GrantType\RefreshToken;
+use Sainsburys\Guzzle\Plugin\Oauth2\Oauth2Plugin;
+use Sainsburys\Guzzle\Plugin\Oauth2\GrantType\PasswordCredentials;
+use Sainsburys\Guzzle\Plugin\Oauth2\GrantType\RefreshToken;
 
 $oauth2Client = new Client('https://mysite.com/oauth2/token');
 $config = array(

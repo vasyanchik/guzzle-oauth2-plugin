@@ -1,6 +1,6 @@
 <?php
 
-namespace CommerceGuys\Guzzle\Plugin\Oauth2\GrantType;
+namespace Sainsburys\Guzzle\Plugin\Oauth2\GrantType;
 
 interface GrantTypeInterface
 {

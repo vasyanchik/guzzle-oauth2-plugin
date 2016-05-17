@@ -1,6 +1,6 @@
 <?php
 
-namespace CommerceGuys\Guzzle\Plugin\Oauth2\GrantType;
+namespace Sainsburys\Guzzle\Plugin\Oauth2\GrantType;
 
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use HWI\Bundle\OAuthBundle\Security\Http\ResourceOwnerMap;

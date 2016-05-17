@@ -1,8 +1,8 @@
 <?php
 
-namespace CommerceGuys\Guzzle\Plugin\Oauth2;
+namespace Sainsburys\Guzzle\Plugin\Oauth2;
 
-use CommerceGuys\Guzzle\Plugin\Oauth2\GrantType\GrantTypeInterface;
+use Sainsburys\Guzzle\Plugin\Oauth2\GrantType\GrantTypeInterface;
 use Guzzle\Common\Event;
 use Guzzle\Http\Exception\BadResponseException;
 use Guzzle\Http\Message\RequestInterface;

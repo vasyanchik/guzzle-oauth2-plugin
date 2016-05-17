@@ -1,16 +1,16 @@
 <?php
 
-namespace CommerceGuys\Guzzle\Plugin\Oauth2\GrantType;
+namespace Sainsburys\Guzzle\Plugin\Oauth2\GrantType;
 
 use Guzzle\Common\Collection;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Exception\RequestException;
 
 /**
- * Resource owner password credentials grant type.
- * @link http://tools.ietf.org/html/rfc6749#section-4.3
+ * Refresh token grant type.
+ * @link http://tools.ietf.org/html/rfc6749#section-6
  */
-class PasswordCredentials implements GrantTypeInterface
+class RefreshToken implements GrantTypeInterface
 {
     /** @var ClientInterface The token endpoint client */
     protected $client;
@@ -23,21 +23,23 @@ class PasswordCredentials implements GrantTypeInterface
         $this->client = $client;
         $this->config = Collection::fromConfig($config, array(
             'client_secret' => '',
+            'refresh_token' => '',
             'scope' => '',
         ), array(
-            'client_id', 'username', 'password'
+            'client_id',
         ));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTokenData()
+    public function getTokenData($refreshToken = null)
     {
         $postBody = array(
-            'grant_type' => 'password',
-            'username' => $this->config['username'],
-            'password' => $this->config['password'],
+            'grant_type' => 'refresh_token',
+            // If no refresh token was provided to the method, use the one
+            // provided to the constructor.
+            'refresh_token' => $refreshToken ?: $this->config['refresh_token'],
         );
         if ($this->config['scope']) {
             $postBody['scope'] = $this->config['scope'];

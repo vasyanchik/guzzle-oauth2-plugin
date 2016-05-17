@@ -1,16 +1,16 @@
 <?php
 
-namespace CommerceGuys\Guzzle\Plugin\Oauth2\GrantType;
+namespace Sainsburys\Guzzle\Plugin\Oauth2\GrantType;
 
 use Guzzle\Common\Collection;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Exception\RequestException;
 
 /**
- * Authorization code grant type.
- * @link http://tools.ietf.org/html/rfc6749#section-4.1
+ * Client credentials grant type.
+ * @link http://tools.ietf.org/html/rfc6749#section-4.4
  */
-class AuthorizationCode implements GrantTypeInterface
+class ClientCredentials implements GrantTypeInterface
 {
     /** @var ClientInterface The token endpoint client */
     protected $client;
@@ -24,9 +24,8 @@ class AuthorizationCode implements GrantTypeInterface
         $this->config = Collection::fromConfig($config, array(
             'client_secret' => '',
             'scope' => '',
-            'redirect_uri' => '',
         ), array(
-            'client_id', 'code',
+            'client_id',
         ));
     }
 
@@ -36,14 +35,10 @@ class AuthorizationCode implements GrantTypeInterface
     public function getTokenData()
     {
         $postBody = array(
-            'grant_type' => 'authorization_code',
-            'code' => $this->config['code'],
+            'grant_type' => 'client_credentials',
         );
         if ($this->config['scope']) {
             $postBody['scope'] = $this->config['scope'];
-        }
-        if ($this->config['redirect_uri']) {
-            $postBody['redirect_uri'] = $this->config['redirect_uri'];
         }
         $request = $this->client->post(null, array(), $postBody);
         $request->setAuth($this->config['client_id'], $this->config['client_secret']);
